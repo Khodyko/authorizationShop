@@ -1,25 +1,28 @@
 package com.example.shop.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
-
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+@Table(value = "user")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "user")
 public class User {
 
     @Id
+    @Column(value = "id")
     private Long id;
+    @Column(value = "login")
     private String login;
+    @Column(value = "password")
     private String password;
+    @Column(value="password_md5")
     private String passwordMd5;
+    @Column(value = "name")
     private String name;
+    @Column(value="surname")
     private String surname;
+    @Column(value="patronymic")
     private String patronymic;
+
 }

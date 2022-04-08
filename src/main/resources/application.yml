@@ -1,6 +1,21 @@
+server:
+  port : 8080
 spring:
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
   r2dbc:
     driver-class-name: org.postgresql.Driver
-    url: r2dbc:postgresql://localhost:5432/firstPg
+    url: r2dbc:postgresql://localhost:5432/firstPg?schema=shop
     username: postgres
     password: root
+  liquibase:
+    change-log: classpath:/liquibase/changelog.yml
+    url: jdbc:postgresql://localhost:5432/firstPg
+    password: root
+    enabled: true
+    user: postgres
+    default-schema: shop
+
+
