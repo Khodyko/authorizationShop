@@ -19,6 +19,4 @@ public class Url {
     @Id
     private Long id;
     private String url;
-    @JoinTable
-    private Set<Role> roles;
 }

@@ -17,10 +17,4 @@ public class Role {
     @Id
     private Long id;
     private String name;
-    @JoinTable
-    private Set<User> users;
-    @JoinTable
-    private Set<Url> urls;
-
-
 }
