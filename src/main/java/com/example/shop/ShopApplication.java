@@ -9,8 +9,8 @@ import org.springframework.r2dbc.connection.R2dbcTransactionManager;
 import org.springframework.transaction.ReactiveTransactionManager;
 
 /**
- * It is module of multi-module project "Shop"
- * This module is used for authorization and authentication users
+ * It is module of multi-module project "Shop".
+ * This module is used for authorization and authentication of users.
  * For start-loading DB Liquibase is used.
  *
  * @author Khodyko Igor
