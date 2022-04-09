@@ -10,13 +10,14 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(value = "shop.users_roles")
-public class UsersRoles {
+@Table(value = "shop.roles_urls")
+public class RolesUrls {
+
     @Id
     @Column(value="id")
     private Long id;
-    @Column(value = "user_id")
-    private Long userId;
     @Column(value = "role_id")
+    private Long userId;
+    @Column(value = "url_id")
     private Long roleId;
 }

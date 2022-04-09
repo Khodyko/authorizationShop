@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Khodyko_Igor
       changes:
         - createTable:
-            tableName: url,
+            tableName: roles_urls
             columns:
               - column:
                   name: id
@@ -14,20 +14,14 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: url
-                  type: text
+                  name: role_id
+                  type: BIGINT
+                  autoIncrement: true
                   constraints:
-                    unique: true
                     nullable: false
-        - insert:
-            tableName: url
-            columns:
               - column:
-                  name: url
-                  value: someUrl
-        - insert:
-            tableName: url
-            columns:
-              - column:
-                  name: url
-                  value: someUrl2
+                  name: url_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false

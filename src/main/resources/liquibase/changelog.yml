@@ -5,3 +5,7 @@ databaseChangeLog:
       file: classpath:/liquibase/role_changelog.yml
   - include:
       file: classpath:/liquibase/url_changelog.yml
+  - include:
+      file: classpath:/liquibase/users_roles_changelog.yml
+  - include:
+      file: classpath:/liquibase/roles_urls_changelog.yml
