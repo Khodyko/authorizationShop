@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepositoryImpl userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Flux<User> allUsers() {

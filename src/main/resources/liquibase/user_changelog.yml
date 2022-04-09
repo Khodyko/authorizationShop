@@ -1,0 +1,72 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Khodyko_Igor
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password_md5
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: surname
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: login
+                  value: someLogin
+              - column:
+                  name: password
+                  value: somePassword
+              - column:
+                  name: password_md5
+                  value: somePasswordMd5
+              - column:
+                  name: name
+                  value: someName
+              - column:
+                  name: surname
+                  value: someSurname
+              - column:
+                  name: patronymic
+                  value: somepatronymic

@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Khodyko_Igor
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: someRole
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: someRole2

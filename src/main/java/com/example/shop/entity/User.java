@@ -1,12 +1,14 @@
 package com.example.shop.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(value = "user")
+@Table(value = "shop.user")
 @Data
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -24,5 +26,4 @@ public class User {
     private String surname;
     @Column(value="patronymic")
     private String patronymic;
-
 }

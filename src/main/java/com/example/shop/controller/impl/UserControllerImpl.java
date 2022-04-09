@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.ServerRequest;
-import org.springframework.web.servlet.function.ServerResponse;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -33,9 +30,7 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity allUsers() {
         System.out.println("users!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
         List<User> users = userServiceImpl.allUsers().collectList().block();
-//        System.out.println(users.get(0));
+        System.out.println(users.get(0));
         return new ResponseEntity(HttpStatus.OK);
     }
-
-
 }
