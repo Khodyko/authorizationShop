@@ -1,7 +1,8 @@
 package com.example.shop.controller.impl;
 
 import com.example.shop.controller.UserController;
-import com.example.shop.entity.User;
+import com.example.shop.entity.user.ResponseUser;
+import com.example.shop.entity.user.User;
 import com.example.shop.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -24,13 +26,15 @@ public class UserControllerImpl implements UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
-@ResponseStatus(code= HttpStatus.OK)
+    @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
     @Override
-    public ResponseEntity allUsers() {
+    public Mono<ResponseUser> getAllUsers() {
         System.out.println("users!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
         List<User> users = userServiceImpl.allUsers().collectList().block();
         System.out.println(users.get(0));
-        return new ResponseEntity(HttpStatus.OK);
+        return null;
     }
+
+
 }

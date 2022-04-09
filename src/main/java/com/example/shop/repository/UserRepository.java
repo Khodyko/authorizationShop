@@ -1,6 +1,6 @@
 package com.example.shop.repository;
 
-import com.example.shop.entity.User;
+import com.example.shop.entity.user.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 

@@ -1,8 +1,7 @@
 package com.example.shop.service.impl;
 
-import com.example.shop.entity.User;
+import com.example.shop.entity.user.User;
 import com.example.shop.repository.UserRepository;
-import com.example.shop.repository.impl.UserRepositoryImpl;
 import com.example.shop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

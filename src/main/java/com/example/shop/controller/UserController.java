@@ -1,7 +1,9 @@
 package com.example.shop.controller;
 
+import com.example.shop.entity.user.ResponseUser;
 import org.springframework.http.ResponseEntity;
+import reactor.core.publisher.Mono;
 
 public interface UserController {
-    public ResponseEntity allUsers();
+    public Mono<ResponseUser> getAllUsers();
 }

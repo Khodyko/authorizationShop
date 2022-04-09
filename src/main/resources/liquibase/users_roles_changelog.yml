@@ -19,9 +19,13 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_user_role
+                    references: user(id)
               - column:
                   name: role_id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_role_user
+                    references: role(id)

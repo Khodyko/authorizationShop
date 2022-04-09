@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Khodyko_Igor
       changes:
         - createTable:
-            tableName: url,
+            tableName: url
             columns:
               - column:
                   name: id
