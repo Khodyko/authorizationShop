@@ -4,37 +4,48 @@ import com.example.shop.controller.UserController;
 import com.example.shop.entity.user.ResponseUser;
 import com.example.shop.entity.user.User;
 import com.example.shop.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserControllerImpl implements UserController {
 
     private final UserServiceImpl userServiceImpl;
 
-    @Autowired
-    public UserControllerImpl(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
-    }
-
     @ResponseStatus(code = HttpStatus.OK)
-    @GetMapping
-    @Override
+    @GetMapping @Override
     public Mono<ResponseUser> getAllUsers() {
-        System.out.println("users!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
         List<User> users = userServiceImpl.allUsers().collectList().block();
         System.out.println(users.get(0));
         return null;
     }
 
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping( "/{id}") @Override
+    public Mono<ResponseUser> getUserById(@PathVariable Long id) {
+        return null;
+    }
 
+    @ResponseStatus(code = HttpStatus.CREATED)
+    @PostMapping @Override
+    public Mono<ResponseUser> saveUser(@RequestBody User userFromWeb) {
+        return null;
+    }
+
+    @ResponseStatus(code = HttpStatus.OK)
+    @PutMapping @Override
+    public Mono<ResponseUser> putUser(@RequestBody User userFromWeb) {
+        return null;
+    }
+
+    @ResponseStatus(code = HttpStatus.OK)
+    @DeleteMapping("/{id}") @Override
+    public void deleteUserById(Long id) {
+    }
 }
