@@ -1,24 +1,26 @@
 package com.example.shop.service;
 
+import com.example.shop.entity.url.Url;
 import com.example.shop.entity.user.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * This class connected UserController and UserRepository(reactive)
+ * This class connected UrlController and UrlRepository(reactive)
  * realises business logic
  * //fixme write about entities
  *
  * @author Igor Khodyko
  */
-public interface UserService {
-    public Flux<User> allUsers();
+public interface UrlService {
+    public Flux<Url> allUrls();
 
-    public Mono<User> getUserById(Long id);
+    public Mono<Url> getUrlById(Long id);
 
-    public Mono<User> saveUser(User user);
+    public Mono<Url> saveUrl(Url url);
 
-    public Mono<User> putUser(User user);
+    public Mono<Url> putUrl(Url url);
 
     public void deleteUserById(Long id);
+
 }
