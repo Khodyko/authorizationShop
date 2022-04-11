@@ -1,40 +1,40 @@
 package com.example.shop.controller;
 
 
-import com.example.shop.entity.role.ResponseRole;
-import com.example.shop.entity.role.Role;
-import com.example.shop.entity.user.ResponseUser;
-import com.example.shop.entity.user.User;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import com.example.shop.entity.simpleEntity.Role;
+import com.example.shop.entity.responseEntity.RoleResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 /**
- *
  * This class used for work with Role data for authentication and authorization.
- //fixme entity names
+ * //fixme entity names
  * It uses entity Role for getting data and ResponseRole for sending.
- * @see com.example.shop.entity.role.Role
- * @see com.example.shop.entity.role.ResponseRole
+ *
  * @author Igor Khodyko
+ * @see Role
+ * @see RoleResponse
  */
+@RequestMapping("/roles")
 public interface RoleController {
+    @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
-    Mono<ResponseRole> getAllRoles();
+    Mono<RoleResponse> getAllRoles();
 
-    @GetMapping
-    Mono<ResponseRole> getRoleById(Long id);
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/{id}")
+    Mono<RoleResponse> getRoleById(@PathVariable Long id);
 
+    @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
-    Mono<ResponseRole> saveRole(Role roleFromWeb);
+    Mono<RoleResponse> saveRole(@RequestBody Role roleFromWeb);
 
+    @ResponseStatus(code = HttpStatus.OK)
     @PutMapping
-    Mono<ResponseRole> putRole(Role roleFromWeb);
+    Mono<RoleResponse> putRole(@RequestBody Role roleFromWeb);
 
-    @DeleteMapping
-    void deleteRoleById(Long id);
+    @ResponseStatus(code = HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    void deleteRoleById(@PathVariable Long id);
 }

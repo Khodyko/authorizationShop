@@ -1,4 +1,4 @@
-package com.example.shop.entity.user;
+package com.example.shop.entity.simpleEntity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -7,7 +7,8 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table(value = "shop.user")
 @Data
-public class UserDto { //TODO создай пакеты для дто, ентити и реквест/респонсов, дто никак не связываются с таблицами
+public class User {
+
     @Id
     @Column(value = "id")
     private Long id;

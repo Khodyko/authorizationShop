@@ -1,6 +1,6 @@
 package com.example.shop.service.impl;
 
-import com.example.shop.entity.url.Url;
+import com.example.shop.entity.simpleEntity.Url;
 import com.example.shop.repository.UrlRepository;
 import com.example.shop.service.UrlService;
 import lombok.RequiredArgsConstructor;

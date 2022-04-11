@@ -5,9 +5,6 @@ spring:
     r2dbc:
       repositories:
         enabled: true
-  sql:
-    init:
-      mode: always
   r2dbc:
     driver-class-name: org.postgresql.Driver
     url: r2dbc:postgresql://localhost:5432/firstPg

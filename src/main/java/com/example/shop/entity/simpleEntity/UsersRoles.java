@@ -1,4 +1,4 @@
-package com.example.shop.entity.role;
+package com.example.shop.entity.simpleEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,11 +10,13 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(value = "shop.role")
-public class Role {
+@Table(value = "shop.users_roles")
+public class UsersRoles {
     @Id
-    @Column(value = "id")
+    @Column(value="id")
     private Long id;
-    @Column(value = "name")
-    private String name;
+    @Column(value = "user_id")
+    private Long userId;
+    @Column(value = "role_id")
+    private Long roleId;
 }

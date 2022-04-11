@@ -1,7 +1,7 @@
 package com.example.shop.mapper;
 
-import com.example.shop.entity.user.User;
-import com.example.shop.entity.user.UserDto;
+import com.example.shop.entity.simpleEntity.User;
+import com.example.shop.entity.dtoEntity.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

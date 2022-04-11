@@ -1,39 +1,41 @@
 package com.example.shop.controller;
 
-import com.example.shop.entity.url.ResponseUrl;
-import com.example.shop.entity.url.Url;
-import com.example.shop.entity.user.ResponseUser;
-import com.example.shop.entity.user.User;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import com.example.shop.entity.simpleEntity.Url;
+import com.example.shop.entity.responseEntity.UrlResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 /**
- *
  * This class used for work with Url entity, authentication and authorization.
- //fixme entity names
+ * //fixme entity names
  * It uses entity Url for getting data and ResponseURl for sending.
- * @see com.example.shop.entity.url.ResponseUrl
- * @see com.example.shop.entity.url.Url
+ *
  * @author Igor Khodyko
+ * @see UrlResponse
+ * @see Url
  */
+@RequestMapping("/urls")
 public interface UrlController {
 
+    @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
-    Mono<ResponseUrl> getAllUrls();
+    Mono<UrlResponse> getAllUrls();
 
-    @GetMapping
-    Mono<ResponseUrl> getUrlById(Long id);
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/{id}")
+    Mono<UrlResponse> getUrlById(@PathVariable Long id);
 
+    @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
-    Mono<ResponseUrl> saveUrl(Url urlFromWeb);
+    Mono<UrlResponse> saveUrl(@PathVariable Url urlFromWeb);
 
+    @ResponseStatus(code = HttpStatus.OK)
     @PutMapping
-    Mono<ResponseUrl> putUrl(Url urlFromWeb);
+    Mono<UrlResponse> putUrl(@PathVariable Url urlFromWeb);
 
-    @DeleteMapping
-    void deleteUrlById(Long id);
+    @ResponseStatus(code = HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    void deleteUrlById(@PathVariable Long id);
 
 }

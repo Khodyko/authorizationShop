@@ -1,4 +1,4 @@
-package com.example.shop.entity.url;
+package com.example.shop.entity.simpleEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

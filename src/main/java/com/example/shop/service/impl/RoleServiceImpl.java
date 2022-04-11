@@ -1,6 +1,6 @@
 package com.example.shop.service.impl;
 
-import com.example.shop.entity.role.Role;
+import com.example.shop.entity.simpleEntity.Role;
 import com.example.shop.repository.RoleRepository;
 import com.example.shop.service.RoleService;
 import lombok.RequiredArgsConstructor;

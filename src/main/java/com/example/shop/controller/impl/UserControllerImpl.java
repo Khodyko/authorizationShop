@@ -1,59 +1,48 @@
 package com.example.shop.controller.impl;
 
 import com.example.shop.controller.UserController;
-import com.example.shop.entity.user.ResponseUser;
-import com.example.shop.entity.user.User;
+import com.example.shop.entity.responseEntity.UserResponse;
+import com.example.shop.entity.simpleEntity.User;
+import com.example.shop.mapper.UserMapperImpl;
 import com.example.shop.service.impl.UserServiceImpl;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users") //TODO перенести в интерфейсы
 @RequiredArgsConstructor
 public class UserControllerImpl implements UserController {
 
     private final UserServiceImpl userServiceImpl;
+    private final UserMapperImpl userMapper;
 
-    @ResponseStatus(code = HttpStatus.OK)
-    @GetMapping
     @Override
-    public Mono<ResponseUser> getAllUsers() {
+    public Mono<UserResponse> getAllUsers() {
         List<User> users = userServiceImpl.allUsers().collectList().block(); //TODO убери блок и весь желтый текст ВЕЗДЕ (во всех классах)
         System.out.println(users.get(0));
         return null;
     }
 
-    @ResponseStatus(code = HttpStatus.OK)
-    @GetMapping("/{id}") //TODO не дублируй маппинги из интерфейсов, для этого и нужны интерфейсы!!! В имплементации только имплентация!!!
     @Override
-    public Mono<ResponseUser> getUserById(@PathVariable Long id) {
+    public Mono<UserResponse> getUserById(Long id) {
         return null;
-    } //TODO все реквестбоди/параметры в интерфейс
-
+    }
     //Fixme User without Id!!!
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping
     @Override
-    public Mono<ResponseUser> saveUser(@RequestBody User userFromWeb) {
+    public Mono<UserResponse> saveUser(User userFromWeb) {
         return null;
     }
 
-    @ResponseStatus(code = HttpStatus.OK)
-    @PutMapping
     @Override
-    public Mono<ResponseUser> putUser(@RequestBody User userFromWeb) {
+    public Mono<UserResponse> putUser(User userFromWeb) {
         return null;
     }
 
-    @ResponseStatus(code = HttpStatus.OK)
-    @DeleteMapping("/{id}")
     @Override
-    public void deleteUserById(@PathVariable Long id) {
+    public void deleteUserById(Long id) {
+        System.out.println("!!!"+id);
+        userServiceImpl.deleteUserById(id);
     }
 }

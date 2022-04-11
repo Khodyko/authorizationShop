@@ -1,7 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.entity.url.Url;
-import com.example.shop.entity.user.User;
+import com.example.shop.entity.simpleEntity.Url;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -13,14 +12,14 @@ import reactor.core.publisher.Mono;
  * @author Igor Khodyko
  */
 public interface UrlService {
-    public Flux<Url> allUrls();
+   Flux<Url> allUrls();
 
-    public Mono<Url> getUrlById(Long id);
+   Mono<Url> getUrlById(Long id);
 
-    public Mono<Url> saveUrl(Url url);
+   Mono<Url> saveUrl(Url url);
 
-    public Mono<Url> putUrl(Url url);
+   Mono<Url> putUrl(Url url);
 
-    public void deleteUserById(Long id);
+   void deleteUserById(Long id);
 
 }

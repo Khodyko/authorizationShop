@@ -1,7 +1,7 @@
 package com.example.shop.service.impl;
 
-import com.example.shop.entity.user.User;
-import com.example.shop.entity.user.UserDto;
+import com.example.shop.entity.simpleEntity.User;
+import com.example.shop.entity.dtoEntity.UserDto;
 import com.example.shop.mapper.UserMapper;
 import com.example.shop.repository.UserRepository;
 import com.example.shop.service.UserService;
@@ -21,14 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Flux<User> allUsers() {
-        Flux<User> userFlux;
-        Flux<UserDto> userDtoFlux=userRepository.findAll();
-        List<User> list= userDtoFlux.log().map(e-> userMapper.INSTANCE.user(e))
-                .collectList().block();
 
-        userFlux=Flux.fromIterable(list);
+      return userRepository.findAll();
 
-        return userFlux;
     }
 
     public Mono<User> getUserById(Long id){
@@ -48,6 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public void deleteUserById(Long id){
+        System.out.println("!!!from serv"+id);
         userRepository.deleteById(id);
+
     }
 }

@@ -1,11 +1,9 @@
 package com.example.shop.controller;
 
-import com.example.shop.entity.user.ResponseUser;
-import com.example.shop.entity.user.User;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import com.example.shop.entity.responseEntity.UserResponse;
+import com.example.shop.entity.simpleEntity.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 /**
@@ -13,24 +11,30 @@ import reactor.core.publisher.Mono;
  * This class used for work with Users data, authentication and authorization.
  //fixme entity names
  * It uses entity User for getting data and ResponseUser for sending.
- * @see ResponseUser
+ * @see UserResponse
  * @see User
  * @author Igor Khodyko
  */
+@RequestMapping("/users")
 public interface UserController {
-
+    @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
-    Mono<ResponseUser> getAllUsers();
+    Mono<UserResponse> getAllUsers();
 
-    @GetMapping
-    Mono<ResponseUser> getUserById(Long id);
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/{id}")
+    Mono<UserResponse> getUserById(@PathVariable Long id);
 
+    @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
-    Mono<ResponseUser> saveUser(User userFromWeb);
+    Mono<UserResponse> saveUser(@RequestBody User userFromWeb);
 
+    @ResponseStatus(code = HttpStatus.OK)
     @PutMapping
-    Mono<ResponseUser> putUser(User userFromWeb);
+    Mono<UserResponse> putUser(@RequestBody User userFromWeb);
 
-    @DeleteMapping
-    void deleteUserById(Long id);
+
+    @ResponseStatus(code = HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    void deleteUserById(@PathVariable Long id);
 }
