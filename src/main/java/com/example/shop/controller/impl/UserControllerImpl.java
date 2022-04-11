@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users") //TODO перенести в интерфейсы
 @RequiredArgsConstructor
 public class UserControllerImpl implements UserController {
 
@@ -24,17 +24,17 @@ public class UserControllerImpl implements UserController {
     @GetMapping
     @Override
     public Mono<ResponseUser> getAllUsers() {
-        List<User> users = userServiceImpl.allUsers().collectList().block();
+        List<User> users = userServiceImpl.allUsers().collectList().block(); //TODO убери блок и весь желтый текст ВЕЗДЕ (во всех классах)
         System.out.println(users.get(0));
         return null;
     }
 
     @ResponseStatus(code = HttpStatus.OK)
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //TODO не дублируй маппинги из интерфейсов, для этого и нужны интерфейсы!!! В имплементации только имплентация!!!
     @Override
     public Mono<ResponseUser> getUserById(@PathVariable Long id) {
         return null;
-    }
+    } //TODO все реквестбоди/параметры в интерфейс
 
     //Fixme User without Id!!!
     @ResponseStatus(code = HttpStatus.CREATED)

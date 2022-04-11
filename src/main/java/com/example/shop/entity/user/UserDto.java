@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table(value = "shop.user")
 @Data
-public class UserDto {
+public class UserDto { //TODO создай пакеты для дто, ентити и реквест/респонсов, дто никак не связываются с таблицами
     @Id
     @Column(value = "id")
     private Long id;

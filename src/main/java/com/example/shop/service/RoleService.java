@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
  * @author Igor Khodyko
  */
 public interface RoleService {
-    public Flux<Role> allRoles();
+    public Flux<Role> allRoles(); //TODO убери public и ненужные методы
 
     public Mono<Role> getRoleById(Long id);
 
