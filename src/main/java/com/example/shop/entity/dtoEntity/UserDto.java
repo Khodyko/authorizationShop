@@ -1,10 +1,6 @@
 package com.example.shop.entity.dtoEntity;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
-
 
 @Data
 public class UserDto {
@@ -15,6 +11,4 @@ public class UserDto {
     private String name;
     private String surname;
     private String patronymic;
-
-
 }

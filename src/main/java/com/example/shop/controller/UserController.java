@@ -1,5 +1,6 @@
 package com.example.shop.controller;
 
+import com.example.shop.entity.requestEntity.UserRequest;
 import com.example.shop.entity.responseEntity.UserResponse;
 import com.example.shop.entity.simpleEntity.User;
 import org.springframework.http.HttpStatus;
@@ -27,11 +28,11 @@ public interface UserController {
 
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
-    Mono<UserResponse> saveUser(@RequestBody User userFromWeb);
+    Mono<UserResponse> saveUser(@RequestBody UserRequest userRequest);
 
     @ResponseStatus(code = HttpStatus.OK)
     @PutMapping
-    Mono<UserResponse> putUser(@RequestBody User userFromWeb);
+    Mono<UserResponse> putUser(@RequestBody UserRequest userRequest);
 
 
     @ResponseStatus(code = HttpStatus.OK)

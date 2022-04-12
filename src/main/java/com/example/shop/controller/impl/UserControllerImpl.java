@@ -1,15 +1,13 @@
 package com.example.shop.controller.impl;
 
 import com.example.shop.controller.UserController;
+import com.example.shop.entity.requestEntity.UserRequest;
 import com.example.shop.entity.responseEntity.UserResponse;
-import com.example.shop.entity.simpleEntity.User;
 import com.example.shop.mapper.UserMapperImpl;
 import com.example.shop.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,29 +18,32 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public Mono<UserResponse> getAllUsers() {
-        List<User> users = userServiceImpl.allUsers().collectList().block(); //TODO убери блок и весь желтый текст ВЕЗДЕ (во всех классах)
-        System.out.println(users.get(0));
-        return null;
+        Mono<UserResponse> userResponseMono = userServiceImpl.allUsers().collectList()
+                .map(list -> userMapper.INSTANCE.userDtoToUserResponse(list));
+        return userResponseMono;
     }
 
     @Override
     public Mono<UserResponse> getUserById(Long id) {
-        return null;
+        Mono<UserResponse> userResponseMono = userServiceImpl.getUserById(id)
+                .map(entity -> userMapper.INSTANCE.userDtoToUserResponse(entity));
+        return userResponseMono;
     }
+
     //Fixme User without Id!!!
     @Override
-    public Mono<UserResponse> saveUser(User userFromWeb) {
+    public Mono<UserResponse> saveUser(UserRequest userRequest) {
         return null;
     }
 
     @Override
-    public Mono<UserResponse> putUser(User userFromWeb) {
+    public Mono<UserResponse> putUser(UserRequest userRequest) {
         return null;
     }
 
     @Override
     public void deleteUserById(Long id) {
-        System.out.println("!!!"+id);
+        System.out.println("!!!" + id);
         userServiceImpl.deleteUserById(id);
     }
 }

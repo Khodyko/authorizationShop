@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.entity.dtoEntity.UserDto;
 import com.example.shop.entity.simpleEntity.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,13 +13,13 @@ import reactor.core.publisher.Mono;
  * @author Igor Khodyko
  */
 public interface UserService {
-    Flux<User> allUsers();
+    Flux<UserDto> allUsers();
 
-    Mono<User> getUserById(Long id);
+    Mono<UserDto> getUserById(Long id);
 
-    Mono<User> saveUser(User user);
+    Mono<UserDto> saveUser(User user);
 
-    Mono<User> putUser(User user);
+    Mono<UserDto> putUser(User user);
 
     void deleteUserById(Long id);
 }
