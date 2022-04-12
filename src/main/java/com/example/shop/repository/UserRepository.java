@@ -2,6 +2,7 @@ package com.example.shop.repository;
 
 import com.example.shop.entity.simpleEntity.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Mono;
 
 /**
  * This is Reactive Repository uses R2DBC API (NON-BLOCKED DBC)
@@ -12,4 +13,5 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
  */
 
 public interface UserRepository extends ReactiveCrudRepository<User, Long> {
+Mono<User> getUserByLogin(String login);
 }
