@@ -1,13 +1,12 @@
-package com.example.shop.entity.responseEntity;
+package com.example.shop.entity.responseEntity.list;
 
 import com.example.shop.entity.dtoEntity.UserDto;
-import com.example.shop.entity.simpleEntity.User;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class UserResponse {
+public class UserResponseList {
     //fixme check access to this entity
     private List<UserDto> users;
 }

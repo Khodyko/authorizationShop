@@ -1,38 +1,40 @@
 package com.example.shop.controller;
 
 import com.example.shop.entity.requestEntity.UserRequest;
-import com.example.shop.entity.responseEntity.UserResponse;
+import com.example.shop.entity.responseEntity.list.UserResponseList;
+import com.example.shop.entity.responseEntity.mono.UserResponseMono;
 import com.example.shop.entity.simpleEntity.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 /**
- *
  * This class used for work with Users data, authentication and authorization.
- //fixme entity names
+ * //fixme entity names
  * It uses entity User for getting data and ResponseUser for sending.
- * @see UserResponse
- * @see User
+ *
  * @author Igor Khodyko
+ * @see UserResponseList
+ * @see User
  */
 @RequestMapping("/users")
 public interface UserController {
     @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
-    Mono<UserResponse> getAllUsers();
+    Mono<UserResponseList> getAllUsers();
 
     @ResponseStatus(code = HttpStatus.OK)
     @GetMapping("/{id}")
-    Mono<UserResponse> getUserById(@PathVariable Long id);
+    Mono<UserResponseMono> getUserById(@PathVariable Long id);
 
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping
-    Mono<UserResponse> saveUser(@RequestBody UserRequest userRequest);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    Mono<UserResponseMono> saveUser(@RequestBody UserRequest userRequest);
 
     @ResponseStatus(code = HttpStatus.OK)
-    @PutMapping
-    Mono<UserResponse> putUser(@RequestBody UserRequest userRequest);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    Mono<UserResponseMono> putUser(@RequestBody UserRequest userRequest);
 
 
     @ResponseStatus(code = HttpStatus.OK)

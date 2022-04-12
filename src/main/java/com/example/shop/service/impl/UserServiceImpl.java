@@ -19,28 +19,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Flux<UserDto> allUsers() {
-      return userRepository.findAll().map(user -> UserMapper.INSTANCE
+      return userRepository.findAll().map(user -> userMapper.INSTANCE
               .userToUserDto(user));
     }
 
     public Mono<UserDto> getUserById(Long id){
-        return userRepository.findById(id).map(user -> UserMapper.INSTANCE
+        return userRepository.findById(id).map(user -> userMapper.INSTANCE
                 .userToUserDto(user));
     }
     //inner script protection?
-    public Mono<UserDto> saveUser(User userInf){
-        return userRepository.save(userInf).map(user -> UserMapper.INSTANCE
+    //save->create
+    public Mono<UserDto> saveUser(UserDto userDtoInf){
+        User userInf=userMapper.INSTANCE.userDtoToUser(userDtoInf);
+        return userRepository.save(userInf).map(user -> userMapper.INSTANCE
                 .userToUserDto(user));
     }
 
 
-    public Mono<UserDto> putUser(User userInf){
-        return userRepository.save(userInf).map(user -> UserMapper.INSTANCE
+    public Mono<UserDto> putUser(UserDto userDtoInf){
+        User userInf=userMapper.INSTANCE.userDtoToUser(userDtoInf);
+        return userRepository.save(userInf).map(user -> userMapper.INSTANCE
                 .userToUserDto(user));
     }
 
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
-
     }
 }

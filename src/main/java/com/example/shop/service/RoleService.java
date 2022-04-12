@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.entity.dtoEntity.RoleDto;
 import com.example.shop.entity.simpleEntity.Role;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,13 +13,13 @@ import reactor.core.publisher.Mono;
  * @author Igor Khodyko
  */
 public interface RoleService {
-    Flux<Role> allRoles(); //TODO убери ненужные методы
+    Flux<RoleDto> allRoles(); //TODO убери ненужные методы
 
-    Mono<Role> getRoleById(Long id);
+    Mono<RoleDto> getRoleById(Long id);
 
-    Mono<Role> saveRole(Role role);
+    Mono<RoleDto> saveRole(RoleDto role);
 
-    Mono<Role> putRole(Role role);
+    Mono<RoleDto> putRole(RoleDto role);
 
     void deleteRoleById(Long id);
 }

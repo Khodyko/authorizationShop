@@ -1,6 +1,8 @@
 package com.example.shop.service.impl;
 
+import com.example.shop.entity.dtoEntity.RoleDto;
 import com.example.shop.entity.simpleEntity.Role;
+import com.example.shop.mapper.RoleMapper;
 import com.example.shop.repository.RoleRepository;
 import com.example.shop.service.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -13,29 +15,33 @@ import reactor.core.publisher.Mono;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleMapper roleMapper;
 
     @Override
-    public Flux<Role> allRoles() {
-        return roleRepository.findAll();
+    public Flux<RoleDto> allRoles() {
+        return roleRepository.findAll().map(role ->
+                roleMapper.INSTANCE.roleToRoleDto(role));
     }
 
     @Override
-    public Mono<Role> getRoleById(Long id) {
-        return roleRepository.findById(id);
+    public Mono<RoleDto> getRoleById(Long id) {
+        return roleRepository.findById(id).map(roleMapper.INSTANCE::roleToRoleDto);
     }
 
     @Override
-    public Mono<Role> saveRole(Role role) {
-        return roleRepository.save(role);
+    public Mono<RoleDto> saveRole(RoleDto roleDtoInf) {
+        Role roleInf = roleMapper.INSTANCE.roleDtoToRole(roleDtoInf);
+        return roleRepository.save(roleInf).map(roleMapper.INSTANCE::roleToRoleDto);
     }
 
     @Override
-    public Mono<Role> putRole(Role role) {
-        return roleRepository.save(role);
+    public Mono<RoleDto> putRole(RoleDto roleDtoInf) {
+        Role roleInf = roleMapper.INSTANCE.roleDtoToRole(roleDtoInf);
+        return roleRepository.save(roleInf).map(roleMapper.INSTANCE::roleToRoleDto);
     }
 
     @Override
     public void deleteRoleById(Long id) {
-            roleRepository.deleteById(id);
+        roleRepository.deleteById(id);
     }
 }

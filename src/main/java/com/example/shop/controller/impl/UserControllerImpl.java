@@ -1,8 +1,10 @@
 package com.example.shop.controller.impl;
 
 import com.example.shop.controller.UserController;
+import com.example.shop.entity.dtoEntity.UserDto;
 import com.example.shop.entity.requestEntity.UserRequest;
-import com.example.shop.entity.responseEntity.UserResponse;
+import com.example.shop.entity.responseEntity.list.UserResponseList;
+import com.example.shop.entity.responseEntity.mono.UserResponseMono;
 import com.example.shop.mapper.UserMapperImpl;
 import com.example.shop.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -13,37 +15,38 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserControllerImpl implements UserController {
 
-    private final UserServiceImpl userServiceImpl;
-    private final UserMapperImpl userMapper;
+    private final UserServiceImpl userService;
+    private final UserMapperImpl mapper;
 
     @Override
-    public Mono<UserResponse> getAllUsers() {
-        Mono<UserResponse> userResponseMono = userServiceImpl.allUsers().collectList()
-                .map(list -> userMapper.INSTANCE.userDtoToUserResponse(list));
-        return userResponseMono;
+    public Mono<UserResponseList> getAllUsers() {
+        return userService.allUsers().collectList()
+                .map(mapper.INSTANCE::userDtoToUserResponseList);
     }
 
     @Override
-    public Mono<UserResponse> getUserById(Long id) {
-        Mono<UserResponse> userResponseMono = userServiceImpl.getUserById(id)
-                .map(entity -> userMapper.INSTANCE.userDtoToUserResponse(entity));
-        return userResponseMono;
+    public Mono<UserResponseMono> getUserById(Long id) {
+        return userService.getUserById(id)
+                .map(mapper.INSTANCE::userDtoToUserResponseMono);
     }
 
     //Fixme User without Id!!!
     @Override
-    public Mono<UserResponse> saveUser(UserRequest userRequest) {
-        return null;
+    public Mono<UserResponseMono> saveUser(UserRequest userRequest) {
+        UserDto userDto= mapper.INSTANCE.userRequestToUserDto(userRequest);
+        return userService.saveUser(userDto)
+                .map(mapper.INSTANCE::userDtoToUserResponseMono);
     }
 
     @Override
-    public Mono<UserResponse> putUser(UserRequest userRequest) {
-        return null;
+    public Mono<UserResponseMono> putUser(UserRequest userRequest) {
+        UserDto userDto= mapper.INSTANCE.userRequestToUserDto(userRequest);
+        return userService.saveUser(userDto)
+                .map(mapper.INSTANCE::userDtoToUserResponseMono);
     }
 
     @Override
     public void deleteUserById(Long id) {
-        System.out.println("!!!" + id);
-        userServiceImpl.deleteUserById(id);
+        userService.deleteUserById(id);
     }
 }

@@ -1,9 +1,11 @@
 package com.example.shop.controller;
 
-
+import com.example.shop.entity.requestEntity.RoleRequest;
+import com.example.shop.entity.responseEntity.mono.RoleResponseMono;
 import com.example.shop.entity.simpleEntity.Role;
-import com.example.shop.entity.responseEntity.RoleResponse;
+import com.example.shop.entity.responseEntity.list.RoleResponseList;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -14,25 +16,25 @@ import reactor.core.publisher.Mono;
  *
  * @author Igor Khodyko
  * @see Role
- * @see RoleResponse
+ * @see RoleResponseList
  */
 @RequestMapping("/roles")
 public interface RoleController {
     @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
-    Mono<RoleResponse> getAllRoles();
+    Mono<RoleResponseList> getAllRoles();
 
     @ResponseStatus(code = HttpStatus.OK)
     @GetMapping("/{id}")
-    Mono<RoleResponse> getRoleById(@PathVariable Long id);
+    Mono<RoleResponseMono> getRoleById(@PathVariable Long id);
 
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping
-    Mono<RoleResponse> saveRole(@RequestBody Role roleFromWeb);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    Mono<RoleResponseMono> saveRole(@RequestBody RoleRequest roleRequest);
 
     @ResponseStatus(code = HttpStatus.OK)
-    @PutMapping
-    Mono<RoleResponse> putRole(@RequestBody Role roleFromWeb);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    Mono<RoleResponseMono> putRole(@RequestBody RoleRequest roleRequest);
 
     @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping("/{id}")
