@@ -10,10 +10,8 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {RoleMapper.class})
+@Mapper(config = MapStructConfiguration.class)
 public interface RoleMapper {
-    RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
-
     RoleDto roleToRoleDto(Role role);
 
     Role roleDtoToRole(RoleDto roleDto);
@@ -32,5 +30,5 @@ public interface RoleMapper {
     default RoleResponseMono roleDtoToRoleResponseMono(RoleDto roleDto) {
         return new RoleResponseMono(roleDto);
     }
-   
+
 }

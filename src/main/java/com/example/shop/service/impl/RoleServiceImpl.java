@@ -19,25 +19,25 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Flux<RoleDto> allRoles() {
-        return roleRepository.findAll().map(role ->
-                roleMapper.INSTANCE.roleToRoleDto(role));
+        return roleRepository.findAll().map(
+                roleMapper::roleToRoleDto);
     }
 
     @Override
     public Mono<RoleDto> getRoleById(Long id) {
-        return roleRepository.findById(id).map(roleMapper.INSTANCE::roleToRoleDto);
+        return roleRepository.findById(id).map(roleMapper::roleToRoleDto);
     }
 
     @Override
     public Mono<RoleDto> saveRole(RoleDto roleDtoInf) {
-        Role roleInf = roleMapper.INSTANCE.roleDtoToRole(roleDtoInf);
-        return roleRepository.save(roleInf).map(roleMapper.INSTANCE::roleToRoleDto);
+        Role roleInf = roleMapper.roleDtoToRole(roleDtoInf);
+        return roleRepository.save(roleInf).map(roleMapper::roleToRoleDto);
     }
 
     @Override
     public Mono<RoleDto> putRole(RoleDto roleDtoInf) {
-        Role roleInf = roleMapper.INSTANCE.roleDtoToRole(roleDtoInf);
-        return roleRepository.save(roleInf).map(roleMapper.INSTANCE::roleToRoleDto);
+        Role roleInf = roleMapper.roleDtoToRole(roleDtoInf);
+        return roleRepository.save(roleInf).map(roleMapper::roleToRoleDto);
     }
 
     @Override

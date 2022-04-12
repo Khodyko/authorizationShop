@@ -21,30 +21,30 @@ public class RoleControllerImpl implements RoleController {
     @Override
     public Mono<RoleResponseList> getAllRoles() {
         return roleService.allRoles().collectList()
-                .map(mapper.INSTANCE::roleDtoToRoleResponseList);
+                .map(mapper::roleDtoToRoleResponseList);
     }
 
     @Override
     public Mono<RoleResponseMono> getRoleById(Long id) {
         return roleService.getRoleById(id)
-                .map(mapper.INSTANCE::roleDtoToRoleResponseMono);
+                .map(mapper::roleDtoToRoleResponseMono);
     }
 
     //Fixme User without Id!!!
     @Override
     public Mono<RoleResponseMono> saveRole(RoleRequest roleRequest) {
         System.out.println(roleRequest);
-        RoleDto roleDto = mapper.INSTANCE.roleRequestToRoleDto(roleRequest);
+        RoleDto roleDto = mapper.roleRequestToRoleDto(roleRequest);
         System.out.println(roleDto);
         return roleService.saveRole(roleDto)
-                .map(mapper.INSTANCE::roleDtoToRoleResponseMono);
+                .map(mapper::roleDtoToRoleResponseMono);
     }
 
     @Override
     public Mono<RoleResponseMono> putRole(RoleRequest roleRequest) {
-        RoleDto roleDto = mapper.INSTANCE.roleRequestToRoleDto(roleRequest);
+        RoleDto roleDto = mapper.roleRequestToRoleDto(roleRequest);
         return roleService.saveRole(roleDto)
-                .map(mapper.INSTANCE::roleDtoToRoleResponseMono);
+                .map(mapper::roleDtoToRoleResponseMono);
     }
 
     @Override

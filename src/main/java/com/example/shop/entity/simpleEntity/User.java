@@ -1,5 +1,6 @@
 package com.example.shop.entity.simpleEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -15,6 +16,7 @@ public class User {
     @Column(value = "login")
     private String login;
     @Column(value = "password")
+    @JsonIgnore
     private String password;
     @Column(value="password_md5")
     private String passwordMd5;
