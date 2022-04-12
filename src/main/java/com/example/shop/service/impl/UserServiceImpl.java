@@ -21,17 +21,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Flux<UserDto> allUsers() {
-      return userRepository.findAll().map(userMapper::userToUserDto);
+      return userRepository.findAll().map(userMapper::userToUserDto)
+              .subscribeOn(Schedulers.boundedElastic());
     }
 
     public Mono<UserDto> getUserById(Long id){
-        return userRepository.findById(id).map(userMapper::userToUserDto);
+        return userRepository.findById(id).map(userMapper::userToUserDto)
+                .subscribeOn(Schedulers.boundedElastic());
     }
     //inner script protection?
     //save->create
     public Mono<UserDto> saveUser(UserDto userDtoInf){
         User userInf=userMapper.INSTANCE.userDtoToUser(userDtoInf);
-        return userRepository.save(userInf).map(userMapper::userToUserDto);
+        return userRepository.save(userInf).map(userMapper::userToUserDto)
+                .subscribeOn(Schedulers.boundedElastic());
     }
 
 
