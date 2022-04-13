@@ -1,8 +1,11 @@
 package com.example.shop.controller;
 
+import com.example.shop.entity.requestEntity.UrlRequest;
+import com.example.shop.entity.responseEntity.list.UrlResponseList;
+import com.example.shop.entity.responseEntity.mono.UrlResponseMono;
 import com.example.shop.entity.simpleEntity.Url;
-import com.example.shop.entity.responseEntity.UrlResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -12,7 +15,8 @@ import reactor.core.publisher.Mono;
  * It uses entity Url for getting data and ResponseURl for sending.
  *
  * @author Igor Khodyko
- * @see UrlResponse
+ * @see UrlResponseMono
+ * @see UrlResponseList
  * @see Url
  */
 @RequestMapping("/urls")
@@ -20,19 +24,19 @@ public interface UrlController {
 
     @ResponseStatus(code = HttpStatus.OK)
     @GetMapping
-    Mono<UrlResponse> getAllUrls();
+    Mono<UrlResponseList> getAllUrls();
 
     @ResponseStatus(code = HttpStatus.OK)
     @GetMapping("/{id}")
-    Mono<UrlResponse> getUrlById(@PathVariable Long id);
+    Mono<UrlResponseMono> getUrlById(@PathVariable Long id);
 
     @ResponseStatus(code = HttpStatus.CREATED)
-    @PostMapping
-    Mono<UrlResponse> saveUrl(@PathVariable Url urlFromWeb);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    Mono<UrlResponseMono> saveUrl(@PathVariable UrlRequest urlFromWeb);
 
     @ResponseStatus(code = HttpStatus.OK)
-    @PutMapping
-    Mono<UrlResponse> putUrl(@PathVariable Url urlFromWeb);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    Mono<UrlResponseMono> putUrl(@PathVariable UrlRequest urlFromWeb);
 
     @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping("/{id}")

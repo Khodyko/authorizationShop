@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import reactor.core.publisher.Mono;
 
@@ -18,8 +18,8 @@ public class WebSecurityConfig {
     private final SecurityContextRepository securityContextRepository;
 
     @Bean
-    public BCryptPasswordEncoder bcryptBean(){
-        return new BCryptPasswordEncoder(10);
+    public MessageDigestPasswordEncoder bcryptBean(){
+        return new MessageDigestPasswordEncoder("MD5");
     }
 
     @Bean
