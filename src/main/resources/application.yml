@@ -17,5 +17,7 @@ spring:
     enabled: true
     user: postgres
     default-schema: shop
-
+jwt:
+  secret: long-long-long-text
+  expiration: 86400
 
