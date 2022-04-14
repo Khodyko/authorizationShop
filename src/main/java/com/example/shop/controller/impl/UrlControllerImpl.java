@@ -1,11 +1,11 @@
 package com.example.shop.controller.impl;
 
 import com.example.shop.controller.UrlController;
-import com.example.shop.entity.dtoEntity.UrlDto;
-import com.example.shop.entity.requestEntity.UrlRequest;
-import com.example.shop.entity.responseEntity.list.UrlResponseList;
-import com.example.shop.entity.responseEntity.mono.UrlResponseMono;
-import com.example.shop.mapper.UrlMapper;
+import com.example.shop.entity.dto.UrlDto;
+import com.example.shop.entity.request.UrlRequest;
+import com.example.shop.entity.response.list.UrlResponseList;
+import com.example.shop.entity.response.mono.UrlResponseMono;
+import com.example.shop.converter.UrlConverter;
 import com.example.shop.service.impl.UrlServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 public class UrlControllerImpl implements UrlController {
 
     private final UrlServiceImpl urlService;
-    private final UrlMapper mapper;
+    private final UrlConverter mapper;
 
     @Override
     public Mono<UrlResponseList> getAllUrls() {

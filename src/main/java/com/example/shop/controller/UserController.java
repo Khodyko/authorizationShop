@@ -1,9 +1,9 @@
 package com.example.shop.controller;
 
-import com.example.shop.entity.requestEntity.UserRequest;
-import com.example.shop.entity.responseEntity.list.UserResponseList;
-import com.example.shop.entity.responseEntity.mono.UserResponseMono;
-import com.example.shop.entity.simpleEntity.User;
+import com.example.shop.entity.request.UserRequest;
+import com.example.shop.entity.response.list.UserResponseList;
+import com.example.shop.entity.response.mono.UserResponseMono;
+import com.example.shop.entity.simple.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

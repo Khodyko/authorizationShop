@@ -1,15 +1,15 @@
 package com.example.shop.security;
 
-import com.example.shop.entity.simpleEntity.User;
+import com.example.shop.entity.simple.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.HashMap;
 
 @Component
 public class JwtUtil {
@@ -19,7 +19,7 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private String expirationTime;
 
-    public String extractUserName(String authToken) {
+    public String extractUserLogin(String authToken) {
 
         return getClaimsFromToken(authToken)
                 .getSubject();
@@ -40,17 +40,12 @@ public class JwtUtil {
                 .before(new Date());
     }
 
-    public String generateToken(User user){
-        HashMap<String, Object> claims=new HashMap<>();
-        //fixme getRole
-//        claims.put("role", List.of(user.getRole()));
+    public String generateToken(UserDetails user){
         Long expirationSeconds=Long.parseLong(expirationTime);
         Date creationDate=new Date();
         Date expirationDate= new Date(creationDate.getTime()+expirationSeconds*1000);
         return  Jwts.builder()
-                .setClaims(claims)
-                //id?
-                .setSubject(user.getLogin())
+                .setSubject(user.getUsername())
                 .setIssuedAt(creationDate)
                 .setExpiration(expirationDate)
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes()))

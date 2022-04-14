@@ -1,8 +1,8 @@
 package com.example.shop.service.impl;
 
-import com.example.shop.entity.dtoEntity.UrlDto;
-import com.example.shop.entity.simpleEntity.Url;
-import com.example.shop.mapper.UrlMapper;
+import com.example.shop.entity.dto.UrlDto;
+import com.example.shop.entity.simple.Url;
+import com.example.shop.converter.UrlConverter;
 import com.example.shop.repository.UrlRepository;
 import com.example.shop.service.UrlService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import reactor.core.scheduler.Schedulers;
 public class UrlServiceImpl implements UrlService {
 
     private final UrlRepository urlRepository;
-    private final UrlMapper urlMapper;
+    private final UrlConverter urlMapper;
 
     @Override
     public Flux<UrlDto> allUrls() {

@@ -1,6 +1,7 @@
 package com.example.shop.security;
 
-import io.jsonwebtoken.Claims;
+import com.example.shop.entity.simple.User;
+import com.example.shop.service.impl.UserSecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,27 +18,28 @@ import java.util.stream.Collectors;
 public class AuthenticationManager implements ReactiveAuthenticationManager {
 
     private final JwtUtil jwtUtil;
+    private final UserSecurityService userSecurityService;
 
     @Override
     public Mono<Authentication> authenticate(Authentication authentication) {
         String authToken = authentication.getCredentials().toString();
-
-        String userName;
-
+        String userLogin;
         try {
-            userName = jwtUtil.extractUserName(authToken);
+            userLogin = jwtUtil.extractUserLogin(authToken);
         } catch (Exception e) {
-            userName = null;
+            userLogin = null;
             System.out.println(e);
         }
-        if (userName != null && jwtUtil.validateToken(authToken)) {
-            Claims claims = jwtUtil.getClaimsFromToken(authToken);
-            List<String> roles = claims.get("role", List.class);
-            List<SimpleGrantedAuthority> authorities = roles.stream().map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList());
-
+        if (userLogin != null && jwtUtil.validateToken(authToken)) {
+//            Claims claims = jwtUtil.getClaimsFromToken(authToken);
+//            List<String> roles = claims.get("role", List.class);
+            User user=userSecurityService.findByUsername(userLogin).cast(User.class).block();
+            List<SimpleGrantedAuthority> authorities =userSecurityService.findRolesByUserId(user.getId())
+                    .map(role->new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList()).block();
+//                    roles.stream().map(SimpleGrantedAuthority::new)
+//                    .collect(Collectors.toList());
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    userName, null, authorities
+                    userLogin, null, authorities
             );
             return Mono.just(authenticationToken);
         } else {

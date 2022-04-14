@@ -1,6 +1,6 @@
 package com.example.shop.repository;
 
-import com.example.shop.entity.simpleEntity.User;
+import com.example.shop.entity.simple.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 

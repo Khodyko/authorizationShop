@@ -1,11 +1,11 @@
 package com.example.shop.controller.impl;
 
 import com.example.shop.controller.UserController;
-import com.example.shop.entity.dtoEntity.UserDto;
-import com.example.shop.entity.requestEntity.UserRequest;
-import com.example.shop.entity.responseEntity.list.UserResponseList;
-import com.example.shop.entity.responseEntity.mono.UserResponseMono;
-import com.example.shop.mapper.UserMapper;
+import com.example.shop.entity.dto.UserDto;
+import com.example.shop.entity.request.UserRequest;
+import com.example.shop.entity.response.list.UserResponseList;
+import com.example.shop.entity.response.mono.UserResponseMono;
+import com.example.shop.converter.UserConverter;
 import com.example.shop.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 public class UserControllerImpl implements UserController {
 
     private final UserServiceImpl userService;
-    private final UserMapper mapper;
+    private final UserConverter mapper;
 
     @Override
     public Mono<UserResponseList> getAllUsers() {

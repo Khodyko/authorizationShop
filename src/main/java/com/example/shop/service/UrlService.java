@@ -1,7 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.entity.dtoEntity.UrlDto;
-import com.example.shop.entity.simpleEntity.Url;
+import com.example.shop.entity.dto.UrlDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

@@ -1,6 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.entity.dtoEntity.UserDto;
+import com.example.shop.entity.dto.UserDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

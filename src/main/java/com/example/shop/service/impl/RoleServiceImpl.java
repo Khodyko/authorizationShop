@@ -1,8 +1,8 @@
 package com.example.shop.service.impl;
 
-import com.example.shop.entity.dtoEntity.RoleDto;
-import com.example.shop.entity.simpleEntity.Role;
-import com.example.shop.mapper.RoleMapper;
+import com.example.shop.entity.dto.RoleDto;
+import com.example.shop.entity.simple.Role;
+import com.example.shop.converter.RoleConverter;
 import com.example.shop.repository.RoleRepository;
 import com.example.shop.service.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -16,31 +16,31 @@ import reactor.core.scheduler.Schedulers;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
-    private final RoleMapper roleMapper;
+    private final RoleConverter roleConverter;
 
     @Override
     public Flux<RoleDto> allRoles() {
-        return roleRepository.findAll().map(roleMapper::roleToRoleDto)
+        return roleRepository.findAll().map(roleConverter::roleToRoleDto)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
     @Override
     public Mono<RoleDto> getRoleById(Long id) {
-        return roleRepository.findById(id).map(roleMapper::roleToRoleDto)
+        return roleRepository.findById(id).map(roleConverter::roleToRoleDto)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
     @Override
     public Mono<RoleDto> saveRole(RoleDto roleDtoInf) {
-        Role roleInf = roleMapper.roleDtoToRole(roleDtoInf);
-        return roleRepository.save(roleInf).map(roleMapper::roleToRoleDto)
+        Role roleInf = roleConverter.roleDtoToRole(roleDtoInf);
+        return roleRepository.save(roleInf).map(roleConverter::roleToRoleDto)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
     @Override
     public Mono<RoleDto> putRole(RoleDto roleDtoInf) {
-        Role roleInf = roleMapper.roleDtoToRole(roleDtoInf);
-        return roleRepository.save(roleInf).map(roleMapper::roleToRoleDto)
+        Role roleInf = roleConverter.roleDtoToRole(roleDtoInf);
+        return roleRepository.save(roleInf).map(roleConverter::roleToRoleDto)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 

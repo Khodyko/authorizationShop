@@ -1,7 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.entity.dtoEntity.RoleDto;
-import com.example.shop.entity.simpleEntity.Role;
+import com.example.shop.entity.dto.RoleDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
