@@ -21,6 +21,6 @@ spring:
   main:
     web-application-type: reactive
 jwt:
-  secret: long-long-long-text
+  secret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaphf
   expiration: 86400
 

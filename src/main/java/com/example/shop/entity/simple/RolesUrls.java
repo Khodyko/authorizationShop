@@ -17,7 +17,7 @@ public class RolesUrls {
     @Column(value="id")
     private Long id;
     @Column(value = "role_id")
-    private Long userId;
-    @Column(value = "url_id")
     private Long roleId;
+    @Column(value = "url_id")
+    private Long urlId;
 }

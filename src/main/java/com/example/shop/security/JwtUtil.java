@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 @Component
@@ -24,9 +26,10 @@ public class JwtUtil {
         return getClaimsFromToken(authToken)
                 .getSubject();
     }
-
+//fixme change encoding to md5
     public Claims getClaimsFromToken(String authToken) {
-        String key=MD5Encoder.encode(secret.getBytes());
+        String key= Base64.getEncoder().encodeToString(secret.getBytes());
+//                MD5Encoder.encode(secret.getBytes());
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
@@ -35,16 +38,16 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String authToken) {
-        return getClaimsFromToken(authToken)
+        return  getClaimsFromToken(authToken)
                 .getExpiration()
-                .before(new Date());
+                .after(new Date());
     }
 
     public String generateToken(UserDetails user){
         Long expirationSeconds=Long.parseLong(expirationTime);
         Date creationDate=new Date();
         Date expirationDate= new Date(creationDate.getTime()+expirationSeconds*1000);
-        return  Jwts.builder()
+        return   Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(creationDate)
                 .setExpiration(expirationDate)

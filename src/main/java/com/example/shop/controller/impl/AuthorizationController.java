@@ -5,8 +5,8 @@ import com.example.shop.service.impl.UserSecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -23,13 +23,14 @@ public class AuthorizationController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
     //add encoding
     public Mono<ResponseEntity> login(ServerWebExchange swe) {
-        System.out.println("Post auth"+ swe.getFormData());
+        System.out.println("controller");
         return swe.getFormData().flatMap(credentials ->
                 userSecurityService.findByUsername(credentials.getFirst("login"))
-                        .cast(UserDetails.class)
-                        .map(userDetails -> Objects.equals(
+                        .map(userDetails ->
+                                Objects.equals(
                                         credentials.getFirst("password"),
                                         userDetails.getPassword()
                                 )
